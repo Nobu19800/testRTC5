@@ -1,0 +1,54 @@
+# testRTC5 CMake config file
+#
+# This file sets the following variables:
+# testRTC5_FOUND - Always TRUE.
+# testRTC5_INCLUDE_DIRS - Directories containing the testRTC5 include files.
+# testRTC5_IDL_DIRS - Directories containing the testRTC5 IDL files.
+# testRTC5_LIBRARIES - Libraries needed to use testRTC5.
+# testRTC5_DEFINITIONS - Compiler flags for testRTC5.
+# testRTC5_VERSION - The version of testRTC5 found.
+# testRTC5_VERSION_MAJOR - The major version of testRTC5 found.
+# testRTC5_VERSION_MINOR - The minor version of testRTC5 found.
+# testRTC5_VERSION_REVISION - The revision version of testRTC5 found.
+# testRTC5_VERSION_CANDIDATE - The candidate version of testRTC5 found.
+
+message(STATUS "Found testRTC5-@PROJECT_VERSION@")
+set(testRTC5_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(testRTC5_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(testRTC5_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(testRTC5_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(testRTC5_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(testRTC5_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(testRTC5_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(testRTC5_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(testRTC5_VERSION @PROJECT_VERSION@)
+set(testRTC5_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(testRTC5_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(testRTC5_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(testRTC5_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
